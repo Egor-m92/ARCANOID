@@ -122,9 +122,9 @@ function detectCollision() {
     }    
 }
 
-document.addEventListener("mousemove", handleMouseMove);
+document.addEventListener("touchmove", handleTouchMove);
 
-function handleMouseMove(event) {
+function handleTouchMove(event) {
 
     const RELATIVE_X = event.clientX - CANVAS_NODE.offsetLeft;
 
@@ -136,7 +136,7 @@ function handleMouseMove(event) {
 }
 
 function draw() {
-    requestAnimationFrame(draw);
+    
     CTX.save();
     CTX.clearCanvas();
     CTX.scale(innerWidth / width, innerHeight / height);
@@ -183,6 +183,7 @@ function draw() {
     ballX += dx;
     ballY += dy;
 
+    requestAnimationFrame(draw);
     CTX.restore();
 }
 
