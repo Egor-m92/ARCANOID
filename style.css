@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+html {
+    overflow: hidden;
+}
 
 #arkanoid {
     background-color: #3db1c5;

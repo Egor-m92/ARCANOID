@@ -1,6 +1,9 @@
 const CANVAS_NODE = document.getElementById("arkanoid");
 const CTX = CANVAS_NODE.getContext("2d");
 
+CANVAS_NODE.width = innerWidth;
+CANVAS_NODE.height = innerHeight;
+
 const BALL_RADIUS = 10;
 
 const PADDLE_WIDTH = 75;
@@ -133,6 +136,11 @@ function handleMouseMove(event) {
 }
 
 function draw() {
+    requestAnimationFrame(draw);
+    CTX.save();
+    CTX.clearCanvas();
+    CTX.scale(innerWidth / width, innerHeight / height);
+
     CTX.clearRect(0, 0, CANVAS_NODE.width,  CANVAS_NODE.height)
     drawBall();
     drawPaddle();
@@ -175,7 +183,7 @@ function draw() {
     ballX += dx;
     ballY += dy;
 
-    requestAnimationFrame(draw);
+    CTX.restore();
 }
 
 let click = 0;
