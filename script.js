@@ -1,8 +1,8 @@
 const CANVAS_NODE = document.getElementById("arkanoid");
 const CTX = CANVAS_NODE.getContext("2d");
 
-//CANVAS_NODE.width = innerWidth;
-//CANVAS_NODE.height = innerHeight;
+CANVAS_NODE.width = innerWidth;
+CANVAS_NODE.height = innerHeight;
 
 const BALL_RADIUS = 10;
 
@@ -161,10 +161,14 @@ function handleTouchMove (event) {
         var touch = event.touches[0];
 
         // Вычисляем новые координаты элемента
-        paddleX = touch.clientX - startX;
+        const RELATIVE_X = touch.clientX - startX;
 
         // Устанавливаем новые координаты элемента
-        document.style.left = newX + 'px';
+        if (RELATIVE_X > 0 && RELATIVE_X < CANVAS_NODE.width) {
+
+            paddleX = RELATIVE_X - PADDLE_WIDTH / 2;
+    
+        }
     }
 
 }
