@@ -194,7 +194,8 @@ CTX.fillText("ARCANOID", CANVAS_NODE.width / 4, CANVAS_NODE.height / 3);
 
 CTX.font = "16px Arial";
 CTX.fillText("Нажми на экран чтобы начать играть", CANVAS_NODE.width / 6, CANVAS_NODE.height / 2);
-document.addEventListener("touchstart", e => {
+
+document.addEventListener("touchstart" || "click", e => {
     click++;
     if (click === 1 && click < 2) {
         draw();
