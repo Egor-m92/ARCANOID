@@ -1,8 +1,8 @@
 const CANVAS_NODE = document.getElementById("arkanoid");
 const CTX = CANVAS_NODE.getContext("2d");
 
-CANVAS_NODE.width = innerWidth;
-CANVAS_NODE.height = innerHeight;
+//CANVAS_NODE.width = innerWidth;
+//CANVAS_NODE.height = innerHeight;
 
 const BALL_RADIUS = 10;
 
@@ -11,7 +11,7 @@ const PADDLE_HEIGHT = 15;
 
 const BRICK_ROW_COUNT = 5;
 const BRICK_COLUMN_COUNT = 5;
-const BRICK_WIDTH = 60;
+const BRICK_WIDTH = 55;
 const BRICK_HEIGHT = 20;
 const BRICK_PADDING = 10;
 const BRICK_OFFSET = 30;
@@ -122,10 +122,10 @@ function detectCollision() {
     }    
 }
 
-document.addEventListener("touchmove", handleTouchMove);
-document.addEventListener("mousemove", handleTouchMove);
+document.addEventListener("touchstart", handleTouchMove);
+document.addEventListener("mousemove", handleMouseMove);
 
-function handleTouchMove(event) {
+function handleMouseMove(event) {
 
     const RELATIVE_X = event.clientX - CANVAS_NODE.offsetLeft;
 
@@ -134,6 +134,42 @@ function handleTouchMove(event) {
         paddleX = RELATIVE_X - PADDLE_WIDTH / 2;
 
     }
+}
+
+function handleTouchMove (event) {
+
+    event.preventDefault();
+
+    // Получаем первое касание (touch)
+    var touch = event.touches[0];
+
+    // Получаем начальные координаты элемента
+    var startX = touch.clientX - document.offsetLeft;
+    var startY = touch.clientY - document.offsetTop;
+
+    // Добавляем обработчик события touchmove
+    document.addEventListener('touchmove', moveElement);
+
+    // Добавляем обработчик события touchend
+    document.addEventListener('touchend', function() {
+        // Удаляем обработчики событий touchmove и touchend
+        document.removeEventListener('touchmove', moveElement);
+        document.removeEventListener('touchend', arguments.callee);
+    });
+
+    // Функция для перемещения элемента
+    function moveElement(event) {
+        var touch = event.touches[0];
+
+        // Вычисляем новые координаты элемента
+        var newX = touch.clientX - startX;
+        var newY = touch.clientY - startY;
+
+        // Устанавливаем новые координаты элемента
+        document.style.left = newX + 'px';
+        document.style.top = newY + 'px';
+    }
+
 }
 
 function draw() {
@@ -191,10 +227,10 @@ function draw() {
 let click = 0;
 
 CTX.font = "42px Arial";
-CTX.fillText("ARCANOID", CANVAS_NODE.width / 4, CANVAS_NODE.height / 3);
+CTX.fillText("ARCANOID", CANVAS_NODE.width / 5, CANVAS_NODE.height / 3);
 
 CTX.font = "16px Arial";
-CTX.fillText("Нажми на экран чтобы начать играть", CANVAS_NODE.width / 6, CANVAS_NODE.height / 2);
+CTX.fillText("Нажми на экран чтобы начать играть", CANVAS_NODE.width / 8, CANVAS_NODE.height / 2);
 
 document.addEventListener("click", clickTouch);
 document.addEventListener("touchstart", clickTouch);
