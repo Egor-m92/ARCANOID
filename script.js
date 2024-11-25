@@ -123,6 +123,7 @@ function detectCollision() {
 }
 
 document.addEventListener("touchmove", handleTouchMove);
+document.addEventListener("mousemove", handleTouchMove);
 
 function handleTouchMove(event) {
 
@@ -137,9 +138,9 @@ function handleTouchMove(event) {
 
 function draw() {
     
-    CTX.save();
-    CTX.clearCanvas();
-    CTX.scale(innerWidth / width, innerHeight / height);
+    //CTX.save();
+    
+    //CTX.scale(innerWidth / width, innerHeight / height);
 
     CTX.clearRect(0, 0, CANVAS_NODE.width,  CANVAS_NODE.height)
     drawBall();
@@ -184,7 +185,7 @@ function draw() {
     ballY += dy;
 
     requestAnimationFrame(draw);
-    CTX.restore();
+    //CTX.restore();
 }
 
 let click = 0;
@@ -195,13 +196,14 @@ CTX.fillText("ARCANOID", CANVAS_NODE.width / 4, CANVAS_NODE.height / 3);
 CTX.font = "16px Arial";
 CTX.fillText("Нажми на экран чтобы начать играть", CANVAS_NODE.width / 6, CANVAS_NODE.height / 2);
 
-document.addEventListener("touchstart" || "click", e => {
+document.addEventListener("click", clickTouch);
+document.addEventListener("touchstart", clickTouch);
+    
+function clickTouch(event) {
     click++;
     if (click === 1 && click < 2) {
         draw();
-    }
-    
-    
-});
+    } 
+};
 
 //draw();
