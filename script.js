@@ -144,8 +144,7 @@ function handleTouchMove (event) {
     var touch = event.touches[0];
 
     // Получаем начальные координаты элемента
-    var startX = touch.clientX - document.offsetLeft;
-    var startY = touch.clientY - document.offsetTop;
+    var startX = touch.clientX - CANVAS_NODE.offsetLeft;
 
     // Добавляем обработчик события touchmove
     document.addEventListener('touchmove', moveElement);
@@ -162,12 +161,10 @@ function handleTouchMove (event) {
         var touch = event.touches[0];
 
         // Вычисляем новые координаты элемента
-        var newX = touch.clientX - startX;
-        var newY = touch.clientY - startY;
+        paddleX = touch.clientX - startX;
 
         // Устанавливаем новые координаты элемента
         document.style.left = newX + 'px';
-        document.style.top = newY + 'px';
     }
 
 }
