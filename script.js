@@ -122,7 +122,6 @@ function detectCollision() {
     }    
 }
 
-document.addEventListener("touchstart", handleTouchMove);
 document.addEventListener("mousemove", handleMouseMove);
 
 function handleMouseMove(event) {
@@ -135,6 +134,8 @@ function handleMouseMove(event) {
 
     }
 }
+
+document.addEventListener("touchstart", handleTouchMove);
 
 function handleTouchMove (event) {
 
@@ -161,7 +162,7 @@ function handleTouchMove (event) {
         var touch = event.touches[0];
 
         // Вычисляем новые координаты элемента
-        const RELATIVE_X = touch.clientX - startX;
+        const RELATIVE_X = touch.clientX;
 
         // Устанавливаем новые координаты элемента
         if (RELATIVE_X > 0 && RELATIVE_X < CANVAS_NODE.width) {
