@@ -1,15 +1,21 @@
-const CANVAS_NODE = document.getElementById("arkanoid");
+const CANVAS_NODE = document.querySelector('canvas');
 const CTX = CANVAS_NODE.getContext("2d");
 
-CANVAS_NODE.width = innerWidth;
-CANVAS_NODE.height = innerHeight;
+const height = window.visualViewport ? 
+window.visualViewport.height : window.innerHeight;
+const width = window.visualViewport ?
+Math.min(window.visualViewport.width, height * 0.6) : 
+Math.min(window.innerWidth, height * 0.6);
+
+CANVAS_NODE.width = 640 + width / height;
+CANVAS_NODE.height = 640;
 
 const BALL_RADIUS = 10;
 
 const PADDLE_WIDTH = 75;
 const PADDLE_HEIGHT = 15;
 
-const BRICK_ROW_COUNT = 5;
+const BRICK_ROW_COUNT = 9;
 const BRICK_COLUMN_COUNT = 5;
 const BRICK_WIDTH = 55;
 const BRICK_HEIGHT = 20;
@@ -229,10 +235,10 @@ function draw() {
 let click = 0;
 
 CTX.font = "42px Arial";
-CTX.fillText("ARCANOID", CANVAS_NODE.width / 5, CANVAS_NODE.height / 3);
+CTX.fillText("ARCANOID", CANVAS_NODE.width / 3, CANVAS_NODE.height / 3);
 
 CTX.font = "16px Arial";
-CTX.fillText("Нажми на экран чтобы начать играть", CANVAS_NODE.width / 8, CANVAS_NODE.height / 2);
+CTX.fillText("Нажми на экран чтобы начать играть", CANVAS_NODE.width / 3.5, CANVAS_NODE.height / 2);
 
 document.addEventListener("click", clickTouch);
 document.addEventListener("touchstart", clickTouch);
