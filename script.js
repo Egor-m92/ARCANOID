@@ -7,7 +7,7 @@ const width = window.visualViewport ?
 Math.min(window.visualViewport.width, height * 0.6) : 
 Math.min(window.innerWidth, height * 0.6);
 
-CANVAS_NODE.width = 640 + width / height;
+CANVAS_NODE.width = 400 + width / height;
 CANVAS_NODE.height = 640;
 
 const BALL_RADIUS = 10;
